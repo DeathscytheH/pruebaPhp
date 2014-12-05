@@ -6,25 +6,20 @@
 </head>
 <body>
     <h1>Prueba</h1>
-    <?php
-
-    $dir =        'img/';
-    $file_display = array('jpg', 'jpeg', 'png', 'gif');
-
-    if (file_exists($dir) == false) {
-    echo 'Directory \'', $dir, '\' not found!';
-    } else {
-    $dir_contents = scandir($dir);
-
-    foreach ($dir_contents as $file) {
-      $file_type = strtolower(end(explode('.', $file)));
-
-     if ($file !== '.' && $file !== '..' && in_array($file_type, $file_display) == true)     
-{
-            echo '<img src="', $dir, '/', $file, '" alt="', $file, '" />';
-     }
-    }
-    }
-?>
+    <?php 
+        include 'database.php';
+        $db = new database('localhost','contador','root','');
+        $db->conectaDB();
+        $tabla = "select * from prueba_tabla";
+        $db->mostrarUsuariosP($tabla);
+        if(isset($_POST['formDelete'])){
+            if(isset($_POST['id_usr']) && !empty($_POST['id_usr'])){
+                $usr_id = $_POST['id_usr'];
+                $query = "delete from prueba_tabla where id_usr =".$usr_id;
+                $db->executeCommand($query);
+                header('Location: '.$_SERVER['REQUEST_URI']);
+           }
+        }
+    ?>
 </body>
 </html>
