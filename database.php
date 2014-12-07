@@ -46,6 +46,36 @@
           }
           echo "</tbody></table></div>";
       }
+    public function mostrarPrecios($query){
+          $resultado = mysql_query($query);
+          echo "<div class='table-responsive'>
+                    <table class='table table-basic'>
+                        <table class='table table-striped table-bordered table-hover'>
+                            <thead>
+                                <td>ID Cliente</td>
+                                <td>Nombre Cliente</td>
+                                <td>Nombre Producto</td>
+                                <td>Precio Producto</td>
+                                <td>Eliminar</td>
+                                </tr>";
+          while($dato = mysql_fetch_array($resultado)){
+            echo "<tr>";
+              echo "<td>" . $dato['id_cliente'] . "</td>";
+              echo "<td>" . $dato['nombre_cliente'] . "</td>";
+              echo "<td>" . $dato['nombre_producto'] . "</td>";
+              echo "<td>" . $dato['precio_producto'] . "</td>";
+              
+                echo "<td>
+                    <form action='".$_SERVER['PHP_SELF']."' method='post'>
+                        <input type='hidden' id='id_cliente' name='id_cliente' value='$dato[id_cliente]' />
+                        <input type='hidden' id='nombre_producto' name='nombre_producto' value='$dato[nombre_producto]' />                        
+                        <input type='submit' name='formDelete' id='formDelete' value='Eliminar' />
+                    </form>
+                </td>";
+                echo "</tr>";
+          }
+          echo "</tbody></table></div>";
+      }       
        
       public function returnString($query){
          
