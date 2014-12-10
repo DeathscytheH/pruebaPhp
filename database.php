@@ -64,9 +64,10 @@
               echo "<td>" . $dato['nombre_cliente'] . "</td>";
               echo "<td>" . $dato['nombre_producto'] . "</td>";
               echo "<td>" . $dato['precio_producto'] . "</td>";
-              
+              //".$_SERVER['PHP_SELF']."
                 echo "<td>
-                    <form action='".$_SERVER['PHP_SELF']."' method='post'>
+                
+                    <form action='precios.php' method='post'>
                         <input type='hidden' id='id_cliente' name='id_cliente' value='$dato[id_cliente]' />
                         <input type='hidden' id='nombre_producto' name='nombre_producto' value='$dato[nombre_producto]' />                        
                         <input type='submit' name='formDelete' id='formDelete' value='Eliminar' />
